@@ -37,7 +37,7 @@ CREATE SCHEMA `hiolabsDB` DEFAULT CHARACTER SET utf8mb4 ;
 + 更改数据库配置
   src/common/config/database.js
 ```
-const mysql = require('think-model-mysql');
+const mysql = require('think-model-mysql2');
 
 module.exports = {
     handle: mysql,

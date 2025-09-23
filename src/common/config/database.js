@@ -1,4 +1,4 @@
-const mysql = require('think-model-mysql');
+const mysql = require('think-model-mysql2');
 
 module.exports = {
     handle: mysql,
