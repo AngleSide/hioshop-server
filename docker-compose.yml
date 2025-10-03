@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  hioshop:
+  server:
     build: .
     image: hioshop-server:latest
     container_name: hioshop-server
@@ -9,8 +9,24 @@ services:
     environment:
       NODE_ENV: production
       PORT: 8360
+    expose:
+      - "8360"
     volumes:
       - ./runtime:/srv/hioshop/runtime
+    restart: unless-stopped
+    networks:
+      - beisi-shared-network
+
+  hioshop:
+    image: caddy:2-alpine
+    container_name: hioshop
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./www:/srv/hioshop/www:ro
     restart: unless-stopped
     networks:
       - beisi-shared-network

@@ -2,11 +2,11 @@
     encode gzip zstd
 
     handle_path /api/* {
-        reverse_proxy 127.0.0.1:8360
+        reverse_proxy server:8360
     }
 
     handle_path /admin/* {
-        reverse_proxy 127.0.0.1:8360
+        reverse_proxy server:8360
     }
 
     handle {
