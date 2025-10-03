@@ -1,0 +1,335 @@
+{
+  "admin": {
+    "port": 8360,
+    "workers": 0,
+    "stickyCluster": false,
+    "startServerTimeout": 3000,
+    "reloadSignal": "SIGUSR2",
+    "processKillTimeout": 10000,
+    "jsonpCallbackField": "callback",
+    "jsonContentType": "application/json",
+    "jsonpContentType": "application/javascript",
+    "errnoField": "errno",
+    "errmsgField": "errmsg",
+    "defaultErrno": 1000,
+    "validateDefaultErrno": 1001,
+    "default_module": "api",
+    "weixin": {
+      "appid": "wxbec3c357bf4190e8",
+      "secret": "f53599939297c93034167ea145ec000f",
+      "mch_id": "1708391637",
+      "partner_key": "z6J94UikV3wL0rZyM8W1QeBsHTD2AGxp",
+      "notify_url": "https://www.beisi.tech.com/api/pay/notify"
+    },
+    "express": {
+      "appid": "12312312",
+      "appkey": "123123123123123123123123",
+      "request_url": "http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx"
+    },
+    "mianexpress": {
+      "appid": "123123",
+      "appkey": "123123-4e61236-94cb5297309a",
+      "request_url": "http://testapi.kdniao.com:8081/api/EOrderService",
+      "print_url": "http://sandboxapi.kdniao.com:8080/kdniaosandbox/gateway/exterfaceInvoke.json",
+      "ip_server_url": "http://www.kdniao.com/External/GetIp.aspx"
+    },
+    "qiniu": {
+      "access_key": "asdlakjsdlajlajsdlas",
+      "secret_key": "alskdjalksjdlasjdlajsd",
+      "bucket": "bucketname",
+      "domain": "domain/"
+    },
+    "qiniuHttps": {
+      "access_key": "asdlakjsdlajlajsdlasasdla",
+      "secret_key": "aaaaaaaaaaasdasdasdasd",
+      "bucket": "bucketname",
+      "domain": "domain/",
+      "zoneNum": 0
+    },
+    "aliexpress": {
+      "url": "http://wuliu.market.alicloudapi.com/kdi",
+      "appcode": "asldjalsjdlasjdla"
+    },
+    "templateId": {
+      "deliveryId": "w6AMCJ0nVWTsFasdasdgnlNlmCf9TTDmG6_U"
+    },
+    "cache": {
+      "type": "file",
+      "file": {
+        "timeout": 86400000,
+        "cachePath": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\runtime\\cache",
+        "pathDepth": 1,
+        "gcInterval": 86400000
+      }
+    },
+    "model": {
+      "type": "mysql",
+      "mysql": {
+        "logConnect": true,
+        "logSql": true,
+        "database": "hiolabsDB",
+        "prefix": "hiolabs_",
+        "encoding": "utf8mb4",
+        "host": "localhost",
+        "port": "3306",
+        "user": "root",
+        "password": "F29A99E8-4E64-4728-813A-3725EDBAF376",
+        "dateStrings": true
+      }
+    },
+    "logger": {
+      "type": "console",
+      "console": {},
+      "file": {
+        "backups": 10,
+        "absolute": true,
+        "maxLogSize": 51200,
+        "filename": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\logs\\app.log"
+      },
+      "dateFile": {
+        "level": "ALL",
+        "absolute": true,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "filename": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\logs\\app.log"
+      }
+    },
+    "view": {
+      "type": "nunjucks",
+      "nunjucks": {
+        "viewPath": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\view",
+        "sep": "_",
+        "extname": ".html",
+        "options": {}
+      }
+    }
+  },
+  "api": {
+    "port": 8360,
+    "workers": 0,
+    "stickyCluster": false,
+    "startServerTimeout": 3000,
+    "reloadSignal": "SIGUSR2",
+    "processKillTimeout": 10000,
+    "jsonpCallbackField": "callback",
+    "jsonContentType": "application/json",
+    "jsonpContentType": "application/javascript",
+    "errnoField": "errno",
+    "errmsgField": "errmsg",
+    "defaultErrno": 1000,
+    "validateDefaultErrno": 1001,
+    "default_module": "api",
+    "weixin": {
+      "appid": "wxbec3c357bf4190e8",
+      "secret": "f53599939297c93034167ea145ec000f",
+      "mch_id": "1708391637",
+      "partner_key": "z6J94UikV3wL0rZyM8W1QeBsHTD2AGxp",
+      "notify_url": "https://www.beisi.tech.com/api/pay/notify"
+    },
+    "express": {
+      "appid": "12312312",
+      "appkey": "123123123123123123123123",
+      "request_url": "http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx"
+    },
+    "mianexpress": {
+      "appid": "123123",
+      "appkey": "123123-4e61236-94cb5297309a",
+      "request_url": "http://testapi.kdniao.com:8081/api/EOrderService",
+      "print_url": "http://sandboxapi.kdniao.com:8080/kdniaosandbox/gateway/exterfaceInvoke.json",
+      "ip_server_url": "http://www.kdniao.com/External/GetIp.aspx"
+    },
+    "qiniu": {
+      "access_key": "asdlakjsdlajlajsdlas",
+      "secret_key": "alskdjalksjdlasjdlajsd",
+      "bucket": "bucketname",
+      "domain": "domain/"
+    },
+    "qiniuHttps": {
+      "access_key": "asdlakjsdlajlajsdlasasdla",
+      "secret_key": "aaaaaaaaaaasdasdasdasd",
+      "bucket": "bucketname",
+      "domain": "domain/",
+      "zoneNum": 0
+    },
+    "aliexpress": {
+      "url": "http://wuliu.market.alicloudapi.com/kdi",
+      "appcode": "asldjalsjdlasjdla"
+    },
+    "templateId": {
+      "deliveryId": "w6AMCJ0nVWTsFasdasdgnlNlmCf9TTDmG6_U"
+    },
+    "publicController": [
+      "index",
+      "catalog",
+      "auth",
+      "goods",
+      "search",
+      "region",
+      "address"
+    ],
+    "publicAction": [
+      "cart/index",
+      "cart/add",
+      "cart/checked",
+      "cart/update",
+      "cart/delete",
+      "cart/goodscount",
+      "pay/notify"
+    ],
+    "cache": {
+      "type": "file",
+      "file": {
+        "timeout": 86400000,
+        "cachePath": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\runtime\\cache",
+        "pathDepth": 1,
+        "gcInterval": 86400000
+      }
+    },
+    "model": {
+      "type": "mysql",
+      "mysql": {
+        "logConnect": true,
+        "logSql": true,
+        "database": "hiolabsDB",
+        "prefix": "hiolabs_",
+        "encoding": "utf8mb4",
+        "host": "localhost",
+        "port": "3306",
+        "user": "root",
+        "password": "F29A99E8-4E64-4728-813A-3725EDBAF376",
+        "dateStrings": true
+      }
+    },
+    "logger": {
+      "type": "console",
+      "console": {},
+      "file": {
+        "backups": 10,
+        "absolute": true,
+        "maxLogSize": 51200,
+        "filename": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\logs\\app.log"
+      },
+      "dateFile": {
+        "level": "ALL",
+        "absolute": true,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "filename": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\logs\\app.log"
+      }
+    },
+    "view": {
+      "type": "nunjucks",
+      "nunjucks": {
+        "viewPath": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\view",
+        "sep": "_",
+        "extname": ".html",
+        "options": {}
+      }
+    }
+  },
+  "common": {
+    "port": 8360,
+    "workers": 0,
+    "stickyCluster": false,
+    "startServerTimeout": 3000,
+    "reloadSignal": "SIGUSR2",
+    "processKillTimeout": 10000,
+    "jsonpCallbackField": "callback",
+    "jsonContentType": "application/json",
+    "jsonpContentType": "application/javascript",
+    "errnoField": "errno",
+    "errmsgField": "errmsg",
+    "defaultErrno": 1000,
+    "validateDefaultErrno": 1001,
+    "default_module": "api",
+    "weixin": {
+      "appid": "wxbec3c357bf4190e8",
+      "secret": "f53599939297c93034167ea145ec000f",
+      "mch_id": "1708391637",
+      "partner_key": "z6J94UikV3wL0rZyM8W1QeBsHTD2AGxp",
+      "notify_url": "https://www.beisi.tech.com/api/pay/notify"
+    },
+    "express": {
+      "appid": "12312312",
+      "appkey": "123123123123123123123123",
+      "request_url": "http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx"
+    },
+    "mianexpress": {
+      "appid": "123123",
+      "appkey": "123123-4e61236-94cb5297309a",
+      "request_url": "http://testapi.kdniao.com:8081/api/EOrderService",
+      "print_url": "http://sandboxapi.kdniao.com:8080/kdniaosandbox/gateway/exterfaceInvoke.json",
+      "ip_server_url": "http://www.kdniao.com/External/GetIp.aspx"
+    },
+    "qiniu": {
+      "access_key": "asdlakjsdlajlajsdlas",
+      "secret_key": "alskdjalksjdlasjdlajsd",
+      "bucket": "bucketname",
+      "domain": "domain/"
+    },
+    "qiniuHttps": {
+      "access_key": "asdlakjsdlajlajsdlasasdla",
+      "secret_key": "aaaaaaaaaaasdasdasdasd",
+      "bucket": "bucketname",
+      "domain": "domain/",
+      "zoneNum": 0
+    },
+    "aliexpress": {
+      "url": "http://wuliu.market.alicloudapi.com/kdi",
+      "appcode": "asldjalsjdlasjdla"
+    },
+    "templateId": {
+      "deliveryId": "w6AMCJ0nVWTsFasdasdgnlNlmCf9TTDmG6_U"
+    },
+    "cache": {
+      "type": "file",
+      "file": {
+        "timeout": 86400000,
+        "cachePath": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\runtime\\cache",
+        "pathDepth": 1,
+        "gcInterval": 86400000
+      }
+    },
+    "model": {
+      "type": "mysql",
+      "mysql": {
+        "logConnect": true,
+        "logSql": true,
+        "database": "hiolabsDB",
+        "prefix": "hiolabs_",
+        "encoding": "utf8mb4",
+        "host": "localhost",
+        "port": "3306",
+        "user": "root",
+        "password": "F29A99E8-4E64-4728-813A-3725EDBAF376",
+        "dateStrings": true
+      }
+    },
+    "logger": {
+      "type": "console",
+      "console": {},
+      "file": {
+        "backups": 10,
+        "absolute": true,
+        "maxLogSize": 51200,
+        "filename": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\logs\\app.log"
+      },
+      "dateFile": {
+        "level": "ALL",
+        "absolute": true,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "filename": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\logs\\app.log"
+      }
+    },
+    "view": {
+      "type": "nunjucks",
+      "nunjucks": {
+        "viewPath": "C:\\Users\\bes\\Desktop\\GitHub\\hioshop-server\\view",
+        "sep": "_",
+        "extname": ".html",
+        "options": {}
+      }
+    }
+  }
+}
