@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  hioshop:
+    build: .
+    image: hioshop-server:latest
+    container_name: hioshop-server
+    platform: linux/amd64
+    environment:
+      NODE_ENV: production
+      PORT: 8360
+    volumes:
+      - ./runtime:/srv/hioshop/runtime
+    restart: unless-stopped
+    networks:
+      - beisi-shared-network
+
+networks:
+  beisi-shared-network:
+    external: true
+    name: beisi-shared-network
