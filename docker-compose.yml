@@ -20,7 +20,7 @@ services:
     depends_on:
       - server
     ports:
-      - "80:80"
+      - "80"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./www:/srv/hioshop/www:ro
