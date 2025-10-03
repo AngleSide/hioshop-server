@@ -2,9 +2,6 @@ FROM node:18-alpine
 
 WORKDIR /srv/hioshop
 
-RUN apk add --no-cache \
-    graphicsmagick
-
 ENV NODE_ENV=production \
     PORT=8360 \
     HOST=0.0.0.0
