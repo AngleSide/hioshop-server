@@ -1,9 +1,6 @@
-version: "3.8"
-
 services:
   server:
     build: .
-    image: hioshop-server:latest
     container_name: hioshop-server
     platform: linux/amd64
     environment:
