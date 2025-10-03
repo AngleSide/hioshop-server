@@ -3,11 +3,11 @@ module.exports = {
     default_module: 'api',
 	port: 8360, //服务端口，可自定义
     weixin: {
-        appid: 'wx7af111110000000', // 小程序 appid
-        secret: 'cb8e5adce569f9bddce5b8123123e1115aaddce505', // 小程序密钥
-        mch_id: '15988888888', // 商户帐号ID
-        partner_key: 'asdasdasdasdasdasdasd', // 微信支付密钥
-        notify_url: 'https://www.您的域名.com/api/pay/notify' // 微信支付异步通知
+        appid: 'wxbec3c357bf4190e8', // 小程序 appid
+        secret: 'f53599939297c93034167ea145ec000f', // 小程序密钥
+        mch_id: '1708391637', // 商户帐号ID
+        partner_key: 'z6J94UikV3wL0rZyM8W1QeBsHTD2AGxp', // 微信支付密钥
+        notify_url: 'https://www.beisi.tech.com/api/pay/notify' // 微信支付异步通知
     },
     express: {
         // 已废弃，之后考虑改回来，做成和阿里云的物流查询可以切换，方便大家的使用
