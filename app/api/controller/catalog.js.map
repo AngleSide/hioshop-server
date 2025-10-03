@@ -1,0 +1,47 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\catalog.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "categoryId",
+        "get",
+        "model",
+        "data",
+        "limit",
+        "where",
+        "parent_id",
+        "is_category",
+        "order",
+        "select",
+        "currentCategory",
+        "find",
+        "think",
+        "isEmpty",
+        "success",
+        "categoryList",
+        "currentAction",
+        "id",
+        "field",
+        "currentlistAction",
+        "page",
+        "post",
+        "size",
+        "list",
+        "is_on_sale",
+        "is_delete",
+        "sort_order",
+        "countSelect",
+        "category_id"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAChC;;;;AAIMI,eAAN,GAAoB;AAAA;;AAAA;AAChB,kBAAMC,aAAa,MAAKC,GAAL,CAAS,IAAT,CAAnB;AACA,kBAAMC,QAAQ,MAAKA,KAAL,CAAW,UAAX,CAAd;AACA,kBAAMC,OAAO,MAAMD,MAAME,KAAN,CAAY,EAAZ,EAAgBC,KAAhB,CAAsB;AACrCC,2BAAW,CAD0B;AAErCC,6BAAa;AAFwB,aAAtB,EAGhBC,KAHgB,CAGV,gBAHU,EAGQC,MAHR,EAAnB;AAIA,gBAAIC,kBAAkB,IAAtB;AACA,gBAAIV,UAAJ,EAAgB;AACZU,kCAAkB,MAAMR,MAAMG,KAAN,CAAY;AAChC,0BAAML;AAD0B,iBAAZ,EAErBW,IAFqB,EAAxB;AAGH;AACD,gBAAIC,MAAMC,OAAN,CAAcH,eAAd,CAAJ,EAAoC;AAChCA,kCAAkBP,KAAK,CAAL,CAAlB;AACH;AACD,mBAAO,MAAKW,OAAL,CAAa;AAChBC,8BAAcZ;AADE,aAAb,CAAP;AAhBgB;AAmBnB;AACKa,iBAAN,GAAsB;AAAA;;AAAA;AAClB,kBAAMhB,aAAa,OAAKC,GAAL,CAAS,IAAT,CAAnB;AACA,gBAAIE,OAAO,MAAM,OAAKD,KAAL,CAAW,UAAX,EAAuBG,KAAvB,CAA6B;AAC1CY,oBAAIjB;AADsC,aAA7B,EAEdkB,KAFc,CAER,0BAFQ,EAEoBP,IAFpB,EAAjB;AAGA,mBAAO,OAAKG,OAAL,CAAaX,IAAb,CAAP;AALkB;AAMrB;AACKgB,qBAAN,GAA0B;AAAA;;AAAA;AACtB,kBAAMC,OAAO,OAAKC,IAAL,CAAU,MAAV,CAAb;AACA,kBAAMC,OAAO,OAAKD,IAAL,CAAU,MAAV,CAAb;AACA,kBAAMrB,aAAa,OAAKqB,IAAL,CAAU,IAAV,CAAnB;AACA,gBAAIrB,cAAc,CAAlB,EAAqB;AACjB,oBAAIuB,OAAO,MAAM,OAAKrB,KAAL,CAAW,OAAX,EAAoBG,KAApB,CAA0B;AACvCmB,gCAAY,CAD2B;AAEvCC,+BAAW;AAF4B,iBAA1B,EAGdjB,KAHc,CAGR;AACLkB,gCAAY;AADP,iBAHQ,EAKdR,KALc,CAKR,gEALQ,EAK0DE,IAL1D,CAK+DA,IAL/D,EAKqEE,IALrE,EAK2EK,WAL3E,EAAjB;AAMA,uBAAO,OAAKb,OAAL,CAAaS,IAAb,CAAP;AACH,aARD,MAQO;AACH,oBAAIA,OAAO,MAAM,OAAKrB,KAAL,CAAW,OAAX,EAAoBG,KAApB,CAA0B;AACvCmB,gCAAY,CAD2B;AAEvCC,+BAAW,CAF4B;AAGvCG,iCAAa5B;AAH0B,iBAA1B,EAIdQ,KAJc,CAIR;AACLkB,gCAAY;AADP,iBAJQ,EAMdR,KANc,CAMR,gEANQ,EAM0DE,IAN1D,CAM+DA,IAN/D,EAMqEE,IANrE,EAM2EK,WAN3E,EAAjB;AAOA,uBAAO,OAAKb,OAAL,CAAaS,IAAb,CAAP;AACH;AArBqB;AAsBzB;AAtD+B,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\catalog.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\r\nmodule.exports = class extends Base {\r\n    /**\r\n     * 获取分类栏目数据\r\n     * @returns {Promise.<Promise|void|PreventPromise>}\r\n     */\r\n    async indexAction() {\r\n        const categoryId = this.get('id');\r\n        const model = this.model('category');\r\n        const data = await model.limit(10).where({\r\n            parent_id: 0,\r\n            is_category: 1\r\n        }).order('sort_order ASC').select();\r\n        let currentCategory = null;\r\n        if (categoryId) {\r\n            currentCategory = await model.where({\r\n                'id': categoryId\r\n            }).find();\r\n        }\r\n        if (think.isEmpty(currentCategory)) {\r\n            currentCategory = data[0];\r\n        }\r\n        return this.success({\r\n            categoryList: data,\r\n        });\r\n    }\r\n    async currentAction() {\r\n        const categoryId = this.get('id');\r\n        let data = await this.model('category').where({\r\n            id: categoryId\r\n        }).field('id,name,img_url,p_height').find();\r\n        return this.success(data);\r\n    }\r\n    async currentlistAction() {\r\n        const page = this.post('page');\r\n        const size = this.post('size');\r\n        const categoryId = this.post('id');\r\n        if (categoryId == 0) {\r\n            let list = await this.model('goods').where({\r\n                is_on_sale: 1,\r\n                is_delete: 0\r\n            }).order({\r\n                sort_order: 'asc'\r\n            }).field('name,id,goods_brief,min_retail_price,list_pic_url,goods_number').page(page, size).countSelect();\r\n            return this.success(list);\r\n        } else {\r\n            let list = await this.model('goods').where({\r\n                is_on_sale: 1,\r\n                is_delete: 0,\r\n                category_id: categoryId\r\n            }).order({\r\n                sort_order: 'asc'\r\n            }).field('name,id,goods_brief,min_retail_price,list_pic_url,goods_number').page(page, size).countSelect();\r\n            return this.success(list);\r\n        }\r\n    }\r\n};"
+    ]
+}

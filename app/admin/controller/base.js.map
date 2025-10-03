@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\base.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "__before",
+        "token",
+        "ctx",
+        "header",
+        "tokenSerivce",
+        "service",
+        "userId",
+        "getUserId",
+        "controller",
+        "undefined",
+        "fail"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACxCC,UAAN,GAAiB;AAAA;;AAAA;AACf;AACAF,YAAMG,KAAN,GAAc,MAAKC,GAAL,CAASC,MAAT,CAAgB,iBAAhB,KAAsC,EAApD;AACA,YAAMC,eAAeN,MAAMO,OAAN,CAAc,OAAd,EAAuB,OAAvB,CAArB;AACAP,YAAMQ,MAAN,GAAe,MAAMF,aAAaG,SAAb,EAArB;AACA;AACA,UAAI,MAAKL,GAAL,CAASM,UAAT,IAAuB,MAA3B,EAAmC;AACjC,YAAIV,MAAMQ,MAAN,IAAgB,CAAhB,IAAqBR,MAAMQ,MAAN,IAAgBG,SAAzC,EAAoD;AAClD,iBAAO,MAAKC,IAAL,CAAU,GAAV,EAAe,MAAf,CAAP;AACD;AACF;AAVc;AAWhB;AAZ6C,CAAhD",
+    "file": "..\\..\\..\\src\\admin\\controller\\base.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Controller {\r\n  async __before() {\r\n    // 根据token值获取用户id\r\n    think.token = this.ctx.header['x-hioshop-token'] || '';\r\n    const tokenSerivce = think.service('token', 'admin');\r\n    think.userId = await tokenSerivce.getUserId();\r\n    // 只允许登录操作\r\n    if (this.ctx.controller != 'auth') {\r\n      if (think.userId <= 0 || think.userId == undefined) {\r\n        return this.fail(401, '请先登录');\r\n      }\r\n    }\r\n  }\r\n};"
+    ]
+}

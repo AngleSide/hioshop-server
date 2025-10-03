@@ -1,0 +1,42 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\upload.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "fs",
+        "path",
+        "module",
+        "exports",
+        "uploadAvatarAction",
+        "file",
+        "fileType",
+        "type",
+        "spliceLength",
+        "lastIndexOf",
+        "fileTypeText",
+        "slice",
+        "think",
+        "isEmpty",
+        "fail",
+        "that",
+        "name",
+        "uuid",
+        "filename",
+        "is",
+        "createReadStream",
+        "os",
+        "createWriteStream",
+        "ROOT_PATH",
+        "pipe",
+        "success",
+        "fileUrl"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA,MAAMC,KAAKD,QAAQ,IAAR,CAAX;AACA,MAAME,OAAOF,QAAQ,MAAR,CAAb;;AAEAG,OAAOC,OAAP,GAAiB,cAAcL,IAAd,CAAmB;AAC5BM,oBAAN,GAA2B;AAAA;;AAAA;AACzB,YAAMC,OAAO,MAAKA,IAAL,CAAU,aAAV,CAAb;AACA,UAAIC,WAAWD,KAAKE,IAApB;AACA,YAAMC,eAAeF,SAASG,WAAT,CAAqB,GAArB,CAArB;AACA,UAAIC,eAAeJ,SAASK,KAAT,CAAeH,eAAe,CAA9B,CAAnB;AACA,UAAII,MAAMC,OAAN,CAAcR,IAAd,CAAJ,EAAyB;AACvB,eAAO,MAAKS,IAAL,CAAU,MAAV,CAAP;AACD;AACD,YAAMC,YAAN;AACA,UAAIC,OAAOJ,MAAMK,IAAN,CAAW,EAAX,IAAiB,GAAjB,GAAuBP,YAAlC;AACA,YAAMQ,WAAW,2BAA2BF,IAA5C;AACA,YAAMG,KAAKnB,GAAGoB,gBAAH,CAAoBf,KAAKJ,IAAzB,CAAX;AACA,YAAMoB,KAAKrB,GAAGsB,iBAAH,CAAqBV,MAAMW,SAAN,GAAkB,MAAlB,GAA2BL,QAAhD,CAAX;AACAC,SAAGK,IAAH,CAAQH,EAAR;AACA,aAAON,KAAKU,OAAL,CAAa;AAClBT,cAAMA,IADY;AAElBU,iBAASR;AAFS,OAAb,CAAP;AAdyB;AAkB1B;;AAED;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AA/BkC,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\upload.js",
+    "sourcesContent": [
+        "const Base = require(\"./base.js\");\r\nconst fs = require(\"fs\");\r\nconst path = require(\"path\");\r\n\r\nmodule.exports = class extends Base {\r\n  async uploadAvatarAction() {\r\n    const file = this.file('upload_file');\r\n    let fileType = file.type;\r\n    const spliceLength = fileType.lastIndexOf(\"/\");\r\n    let fileTypeText = fileType.slice(spliceLength + 1);\r\n    if (think.isEmpty(file)) {\r\n      return this.fail(\"保存失败\");\r\n    }\r\n    const that = this;\r\n    let name = think.uuid(32) + \".\" + fileTypeText;\r\n    const filename = \"/static/upload/avatar/\" + name;\r\n    const is = fs.createReadStream(file.path);\r\n    const os = fs.createWriteStream(think.ROOT_PATH + \"/www\" + filename);\r\n    is.pipe(os);\r\n    return that.success({\r\n      name: name,\r\n      fileUrl: filename,\r\n    });\r\n  }\r\n\r\n  // async deleteFileAction() {\r\n  //     const url = this.post('para');\r\n  //     let newUrl = url.lastIndexOf(\"/\");\r\n  //     let fileName = url.substring(newUrl + 1);\r\n  //     let delePath = './www/static/upload/goods/detail/' + fileName;\r\n  //     fs.unlink(delePath, function (err) {\r\n  //         if (err) throw err;\r\n  //         return false;\r\n  //     });\r\n  //     return this.success('文件删除成功');\r\n  // }\r\n};\r\n"
+    ]
+}

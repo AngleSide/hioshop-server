@@ -1,0 +1,43 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\settings.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "showSettingsAction",
+        "info",
+        "model",
+        "where",
+        "id",
+        "find",
+        "success",
+        "saveAction",
+        "userId",
+        "getLoginUserId",
+        "name",
+        "post",
+        "mobile",
+        "nickName",
+        "avatar",
+        "name_mobile",
+        "newbuffer",
+        "Buffer",
+        "from",
+        "nickname",
+        "toString",
+        "data",
+        "update",
+        "userDetailAction",
+        "field",
+        "fail"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC5BI,oBAAN,GAA2B;AAAA;;AAAA;AACzB,UAAIC,OAAO,MAAM,MAAKC,KAAL,CAAW,eAAX,EACdC,KADc,CACR;AACLC,YAAI;AADC,OADQ,EAIdC,IAJc,EAAjB;AAKA,aAAO,MAAKC,OAAL,CAAaL,IAAb,CAAP;AANyB;AAO1B;AACKM,YAAN,GAAmB;AAAA;;AAAA;AACjB,UAAIC,SAAS,OAAKC,cAAL,EAAb;AACA,UAAIC,OAAO,OAAKC,IAAL,CAAU,MAAV,CAAX;AACA,UAAIC,SAAS,OAAKD,IAAL,CAAU,QAAV,CAAb;AACA,UAAIE,WAAW,OAAKF,IAAL,CAAU,UAAV,CAAf;AACA,UAAIG,SAAS,OAAKH,IAAL,CAAU,QAAV,CAAb;AACA,UAAII,cAAc,CAAlB;AACA,UAAIL,QAAQ,EAAR,IAAcE,UAAU,EAA5B,EAAgC;AAC9BG,sBAAc,CAAd;AACD;AACD,YAAMC,YAAYC,OAAOC,IAAP,CAAYL,QAAZ,CAAlB;AACA,UAAIM,WAAWH,UAAUI,QAAV,CAAmB,QAAnB,CAAf;AACA,UAAIC,OAAO;AACTX,cAAMA,IADG;AAETE,gBAAQA,MAFC;AAGTO,kBAAUA,QAHD;AAITL,gBAAQA,MAJC;AAKTC,qBAAaA;AALJ,OAAX;AAOA,UAAId,OAAO,MAAM,OAAKC,KAAL,CAAW,MAAX,EACdC,KADc,CACR;AACLC,YAAII;AADC,OADQ,EAIdc,MAJc,CAIPD,IAJO,CAAjB;AAKA,aAAO,OAAKf,OAAL,CAAaL,IAAb,CAAP;AAxBiB;AAyBlB;AACKsB,kBAAN,GAAyB;AAAA;;AAAA;AACvB,UAAIf,SAAS,OAAKC,cAAL,EAAb;AACA,UAAID,UAAU,CAAd,EAAiB;AACf,YAAIP,OAAO,MAAM,OAAKC,KAAL,CAAW,MAAX,EACdC,KADc,CACR;AACLC,cAAII;AADC,SADQ,EAIdgB,KAJc,CAIR,gCAJQ,EAKdnB,IALc,EAAjB;AAMAJ,aAAKkB,QAAL,GAAgBF,OAAOC,IAAP,CAAYjB,KAAKkB,QAAjB,EAA2B,QAA3B,EAAqCC,QAArC,EAAhB;AACA,eAAO,OAAKd,OAAL,CAAaL,IAAb,CAAP;AACD,OATD,MAUI;AACF,eAAO,OAAKwB,IAAL,CAAU,GAAV,EAAc,KAAd,CAAP;AACD;AAdsB;AAexB;AAlDiC,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\settings.js",
+    "sourcesContent": [
+        "const Base = require(\"./base.js\");\r\nmodule.exports = class extends Base {\r\n  async showSettingsAction() {\r\n    let info = await this.model(\"show_settings\")\r\n      .where({\r\n        id: 1,\r\n      })\r\n      .find();\r\n    return this.success(info);\r\n  }\r\n  async saveAction() {\r\n    let userId = this.getLoginUserId();\r\n    let name = this.post(\"name\");\r\n    let mobile = this.post(\"mobile\");\r\n    let nickName = this.post(\"nickName\");\r\n    let avatar = this.post(\"avatar\");\r\n    let name_mobile = 0;\r\n    if (name != \"\" && mobile != \"\") {\r\n      name_mobile = 1;\r\n    }\r\n    const newbuffer = Buffer.from(nickName);\r\n    let nickname = newbuffer.toString(\"base64\");\r\n    let data = {\r\n      name: name,\r\n      mobile: mobile,\r\n      nickname: nickname,\r\n      avatar: avatar,\r\n      name_mobile: name_mobile,\r\n    };\r\n    let info = await this.model(\"user\")\r\n      .where({\r\n        id: userId,\r\n      })\r\n      .update(data);\r\n    return this.success(info);\r\n  }\r\n  async userDetailAction() {\r\n    let userId = this.getLoginUserId();\r\n    if (userId != 0) {\r\n      let info = await this.model(\"user\")\r\n        .where({\r\n          id: userId,\r\n        })\r\n        .field(\"id,mobile,name,nickname,avatar\")\r\n        .find();\r\n      info.nickname = Buffer.from(info.nickname, \"base64\").toString();\r\n      return this.success(info);\r\n    }\r\n    else{\r\n      return this.fail(100,'未登录')\r\n    }\r\n  }\r\n};\r\n"
+    ]
+}

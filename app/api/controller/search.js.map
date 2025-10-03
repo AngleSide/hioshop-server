@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\search.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "userId",
+        "getLoginUserId",
+        "defaultKeyword",
+        "model",
+        "where",
+        "is_default",
+        "limit",
+        "find",
+        "hotKeywordList",
+        "distinct",
+        "field",
+        "select",
+        "historyKeywordList",
+        "user_id",
+        "getField",
+        "success",
+        "helperAction",
+        "keyword",
+        "get",
+        "keywords",
+        "clearHistoryAction",
+        "delete"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA;AACAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC1BI,eAAN,GAAoB;AAAA;;AAAA;AAChB;AACN,gBAAIC,SAAS,MAAKC,cAAL,EAAb,CAAmC;AAC7B,kBAAMC,iBAAiB,MAAM,MAAKC,KAAL,CAAW,UAAX,EAAuBC,KAAvB,CAA6B;AACtDC,4BAAY;AAD0C,aAA7B,EAE1BC,KAF0B,CAEpB,CAFoB,EAEjBC,IAFiB,EAA7B;AAGA;AACA,kBAAMC,iBAAiB,MAAM,MAAKL,KAAL,CAAW,UAAX,EAAuBM,QAAvB,CAAgC,SAAhC,EAA2CC,KAA3C,CAAiD,CAAC,SAAD,EAAY,QAAZ,CAAjD,EAAwEJ,KAAxE,CAA8E,EAA9E,EAAkFK,MAAlF,EAA7B;AACA,kBAAMC,qBAAqB,MAAM,MAAKT,KAAL,CAAW,gBAAX,EAA6BM,QAA7B,CAAsC,SAAtC,EAAiDL,KAAjD,CAAuD;AACpFS,yBAASb;AAD2E,aAAvD,EAE9BM,KAF8B,CAExB,EAFwB,EAEpBQ,QAFoB,CAEX,SAFW,CAAjC;AAGA,mBAAO,MAAKC,OAAL,CAAa;AAChBb,gCAAgBA,cADA;AAEhBU,oCAAoBA,kBAFJ;AAGhBJ,gCAAgBA;AAHA,aAAb,CAAP;AAXgB;AAgBnB;AACKQ,gBAAN,GAAqB;AAAA;;AAAA;AACjB,kBAAMC,UAAU,OAAKC,GAAL,CAAS,SAAT,CAAhB;AACA,kBAAMC,WAAW,MAAM,OAAKhB,KAAL,CAAW,UAAX,EAAuBM,QAAvB,CAAgC,SAAhC,EAA2CL,KAA3C,CAAiD;AACpEa,yBAAS,CAAC,MAAD,EAASA,UAAU,GAAnB;AAD2D,aAAjD,EAEpBH,QAFoB,CAEX,SAFW,EAEA,EAFA,CAAvB;AAGA,mBAAO,OAAKC,OAAL,CAAaI,QAAb,CAAP;AALiB;AAMpB;AACKC,sBAAN,GAA2B;AAAA;;AAAA;AAC7B,gBAAIpB,SAAS,OAAKC,cAAL,EAAb,CAAmC;AAC7B,kBAAM,OAAKE,KAAL,CAAW,gBAAX,EAA6BC,KAA7B,CAAmC;AACrCS,yBAASb;AAD4B,aAAnC,EAEHqB,MAFG,EAAN;AAGA,mBAAO,OAAKN,OAAL,EAAP;AALuB;AAM1B;AA/B+B,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\search.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\r\n//TODO 在后台搜索那里完善，采用专门的搜索开发库\r\nmodule.exports = class extends Base {\r\n    async indexAction() {\r\n        // 取出输入框默认的关键词\r\n\t\tlet userId = this.getLoginUserId();;\r\n        const defaultKeyword = await this.model('keywords').where({\r\n            is_default: 1\r\n        }).limit(1).find();\r\n        // 取出热闹关键词\r\n        const hotKeywordList = await this.model('keywords').distinct('keyword').field(['keyword', 'is_hot']).limit(10).select();\r\n        const historyKeywordList = await this.model('search_history').distinct('keyword').where({\r\n            user_id: userId\r\n        }).limit(10).getField('keyword');\r\n        return this.success({\r\n            defaultKeyword: defaultKeyword,\r\n            historyKeywordList: historyKeywordList,\r\n            hotKeywordList: hotKeywordList\r\n        });\r\n    }\r\n    async helperAction() {\r\n        const keyword = this.get('keyword');\r\n        const keywords = await this.model('keywords').distinct('keyword').where({\r\n            keyword: ['like', keyword + '%']\r\n        }).getField('keyword', 10);\r\n        return this.success(keywords);\r\n    }\r\n    async clearHistoryAction() {\r\n\t\tlet userId = this.getLoginUserId();;\r\n        await this.model('search_history').where({\r\n            user_id: userId\r\n        }).delete();\r\n        return this.success();\r\n    }\r\n};"
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\delivery.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "data",
+        "model",
+        "where",
+        "enabled",
+        "select",
+        "success"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAChC;;;;AAIMI,eAAN,GAAoB;AAAA;;AAAA;AAChB,kBAAMC,OAAO,MAAM,MAAKC,KAAL,CAAW,SAAX,EAAsBC,KAAtB,CAA4B;AAC3CC,yBAAQ;AADmC,aAA5B,EAEhBC,MAFgB,EAAnB;AAGA,mBAAO,MAAKC,OAAL,CAAaL,IAAb,CAAP;AAJgB;AAKnB;AAV+B,CAApC",
+    "file": "..\\..\\..\\src\\admin\\controller\\delivery.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\r\nmodule.exports = class extends Base {\r\n    /**\r\n     * index action\r\n     * @return {Promise} []\r\n     */\r\n    async indexAction() {\r\n        const data = await this.model('shipper').where({\r\n            enabled:1\r\n        }).select();\r\n        return this.success(data);\r\n    }\r\n};"
+    ]
+}

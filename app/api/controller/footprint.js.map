@@ -1,0 +1,51 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\footprint.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "moment",
+        "_",
+        "module",
+        "exports",
+        "deleteAction",
+        "footprintId",
+        "post",
+        "userId",
+        "getLoginUserId",
+        "model",
+        "where",
+        "user_id",
+        "id",
+        "delete",
+        "success",
+        "listAction",
+        "page",
+        "get",
+        "size",
+        "list",
+        "alias",
+        "join",
+        "table",
+        "as",
+        "on",
+        "order",
+        "add_time",
+        "field",
+        "countSelect",
+        "item",
+        "data",
+        "goods",
+        "goods_id",
+        "find",
+        "unix",
+        "format"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA,MAAMC,SAASD,QAAQ,QAAR,CAAf;AACA,MAAME,IAAIF,QAAQ,QAAR,CAAV;AACAG,OAAOC,OAAP,GAAiB,cAAcL,IAAd,CAAmB;AAChC;;;;AAIMM,gBAAN,GAAqB;AAAA;;AAAA;AACjB,kBAAMC,cAAc,MAAKC,IAAL,CAAU,aAAV,CAApB;AACA,kBAAMC,SAAS,MAAKC,cAAL,EAAf,CAAqC;AACrC;AACA,kBAAM,MAAKC,KAAL,CAAW,WAAX,EAAwBC,KAAxB,CAA8B;AAChCC,yBAASJ,MADuB;AAEhCK,oBAAIP;AAF4B,aAA9B,EAGHQ,MAHG,EAAN;AAIA,mBAAO,MAAKC,OAAL,CAAa,MAAb,CAAP;AARiB;AASpB;AACD;;;;AAIMC,cAAN,GAAmB;AAAA;;AAAA;AACf,kBAAMC,OAAO,OAAKC,GAAL,CAAS,MAAT,CAAb;AACA,kBAAMC,OAAO,OAAKD,GAAL,CAAS,MAAT,CAAb;AACN,kBAAMV,SAAS,OAAKC,cAAL,EAAf,CAAqC;AAC/B,kBAAMW,OAAO,MAAM,OAAKV,KAAL,CAAW,WAAX,EAAwBW,KAAxB,CAA8B,GAA9B,EAAmCC,IAAnC,CAAwC;AACvDC,uBAAO,OADgD;AAEvDD,sBAAM,MAFiD;AAGvDE,oBAAI,GAHmD;AAIvDC,oBAAI,CAAC,YAAD,EAAe,MAAf;AAJmD,aAAxC,EAKhBd,KALgB,CAKV;AACLC,yBAASJ;AADJ,aALU,EAOhBS,IAPgB,CAOXA,IAPW,EAOLE,IAPK,EAOCO,KAPD,CAOO;AACtBC,0BAAU;AADY,aAPP,EAShBC,KATgB,CASV,sBATU,EAScC,WATd,EAAnB;AAUA,iBAAK,MAAMC,IAAX,IAAmBV,KAAKW,IAAxB,EAA8B;AAC1B,oBAAIC,QAAQ,MAAM,OAAKtB,KAAL,CAAW,OAAX,EAAoBC,KAApB,CAA0B;AACxCE,wBAAGiB,KAAKG;AADgC,iBAA1B,EAEfL,KAFe,CAET,0EAFS,EAEmEM,IAFnE,EAAlB;AAGAJ,qBAAKH,QAAL,GAAgB1B,OAAOkC,IAAP,CAAYL,KAAKH,QAAjB,EAA2BS,MAA3B,CAAkC,YAAlC,CAAhB;AACAN,qBAAKE,KAAL,GAAaA,KAAb;AACA,oBAAI/B,SAASmC,MAAT,CAAgB,YAAhB,KAAiCN,KAAKH,QAA1C,EAAoD;AAChDG,yBAAKH,QAAL,GAAgB,IAAhB;AACH;AACJ;AACD,mBAAO,OAAKZ,OAAL,CAAaK,IAAb,CAAP;AAxBe;AAyBlB;AA5C+B,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\footprint.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\r\nconst moment = require('moment');\r\nconst _ = require('lodash');\r\nmodule.exports = class extends Base {\r\n    /**\r\n     *\r\n     * @returns {Promise<void|Promise|PreventPromise>}\r\n     */\r\n    async deleteAction() {\r\n        const footprintId = this.post('footprintId');\r\n        const userId = this.getLoginUserId();; \r\n        // 删除当天的同一个商品的足迹\r\n        await this.model('footprint').where({\r\n            user_id: userId,\r\n            id: footprintId\r\n        }).delete();\r\n        return this.success('删除成功');\r\n    }\r\n    /**\r\n     * list action\r\n     * @return {Promise} []\r\n     */\r\n    async listAction() {\r\n        const page = this.get('page');\r\n        const size = this.get('size');\r\n\t\tconst userId = this.getLoginUserId();;\r\n        const list = await this.model('footprint').alias('f').join({\r\n            table: 'goods',\r\n            join: 'left',\r\n            as: 'g',\r\n            on: ['f.goods_id', 'g.id']\r\n        }).where({\r\n            user_id: userId\r\n        }).page(page, size).order({\r\n            add_time: 'desc'\r\n        }).field('id,goods_id,add_time').countSelect();\r\n        for (const item of list.data) {\r\n            let goods = await this.model('goods').where({\r\n                id:item.goods_id\r\n            }).field('name,goods_brief,retail_price,list_pic_url,goods_number,min_retail_price').find();\r\n            item.add_time = moment.unix(item.add_time).format('YYYY-MM-DD');\r\n            item.goods = goods;\r\n            if (moment().format('YYYY-MM-DD') == item.add_time) {\r\n                item.add_time = '今天';\r\n            }\r\n        }\r\n        return this.success(list);\r\n    }\r\n};"
+    ]
+}

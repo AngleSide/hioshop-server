@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\base.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "__before",
+        "token",
+        "ctx",
+        "header",
+        "tokenSerivce",
+        "service",
+        "userId",
+        "getUserId",
+        "getTime",
+        "parseInt",
+        "Date",
+        "now",
+        "getLoginUserId"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACzCC,SAAN,GAAiB;AAAA;;AAAA;AAChB;AACA,SAAMC,QAAQ,MAAKC,GAAL,CAASC,MAAT,CAAgB,iBAAhB,KAAsC,EAApD;AACA,SAAMC,eAAeN,MAAMO,OAAN,CAAc,OAAd,EAAuB,KAAvB,CAArB;AACAP,SAAMQ,MAAN,GAAeF,aAAaG,SAAb,CAAuBN,KAAvB,CAAf;AAJgB;AAKhB;AACD;;;;AAIAO,WAAU;AACT,SAAOC,SAASC,KAAKC,GAAL,KAAa,IAAtB,CAAP;AACA;AACD;;;;AAIAC,kBAAiB;AAChB,QAAMX,QAAQ,KAAKC,GAAL,CAASC,MAAT,CAAgB,iBAAhB,KAAsC,EAApD;AACA,QAAMC,eAAeN,MAAMO,OAAN,CAAc,OAAd,EAAuB,KAAvB,CAArB;AACA,SAAOD,aAAaG,SAAb,CAAuBN,KAAvB,CAAP;AACA;AAtB8C,CAAhD",
+    "file": "..\\..\\..\\src\\api\\controller\\base.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Controller {\r\n\tasync __before() {\r\n\t\t// 根据token值获取用户id\r\n\t\tconst token = this.ctx.header['x-hioshop-token'] || '';\r\n\t\tconst tokenSerivce = think.service('token', 'api');\r\n\t\tthink.userId = tokenSerivce.getUserId(token);\r\n\t}\r\n\t/**\r\n\t * 获取时间戳\r\n\t * @returns {Number}\r\n\t */\r\n\tgetTime() {\r\n\t\treturn parseInt(Date.now() / 1000);\r\n\t}\r\n\t/**\r\n\t * 获取当前登录用户的id\r\n\t * @returns {*}\r\n\t */\r\n\tgetLoginUserId() {\r\n\t\tconst token = this.ctx.header['x-hioshop-token'] || '';\r\n\t\tconst tokenSerivce = think.service('token', 'api');\r\n\t\treturn tokenSerivce.getUserId(token);\r\n\t}\r\n};\r\n"
+    ]
+}

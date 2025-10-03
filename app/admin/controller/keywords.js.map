@@ -1,0 +1,34 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\keywords.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "moment",
+        "module",
+        "exports",
+        "indexAction",
+        "page",
+        "get",
+        "size",
+        "name",
+        "model",
+        "data",
+        "where",
+        "goods_name",
+        "order",
+        "countSelect",
+        "item",
+        "add_time",
+        "unix",
+        "format",
+        "success"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA,MAAMC,SAASD,QAAQ,QAAR,CAAf;AACAE,OAAOC,OAAP,GAAiB,cAAcJ,IAAd,CAAmB;AAChC;;;;AAIMK,eAAN,GAAoB;AAAA;;AAAA;AAChB,kBAAMC,OAAO,MAAKC,GAAL,CAAS,MAAT,KAAoB,CAAjC;AACA,kBAAMC,OAAO,MAAKD,GAAL,CAAS,MAAT,KAAoB,EAAjC;AACA,kBAAME,OAAO,MAAKF,GAAL,CAAS,MAAT,KAAoB,EAAjC;;AAEA,kBAAMG,QAAQ,MAAKA,KAAL,CAAW,MAAX,CAAd;AACA,kBAAMC,OAAO,MAAMD,MAAME,KAAN,CAAY,EAACC,YAAY,CAAC,MAAD,EAAU,IAAGJ,IAAK,GAAlB,CAAb,EAAZ,EAAiDK,KAAjD,CAAuD,CAAC,SAAD,CAAvD,EAAoER,IAApE,CAAyEA,IAAzE,EAA+EE,IAA/E,EAAqFO,WAArF,EAAnB;;AAEA,iBAAK,MAAMC,IAAX,IAAmBL,KAAKA,IAAxB,EAA8B;AAC1BK,qBAAKC,QAAL,GAAgBf,OAAOgB,IAAP,CAAYF,KAAKC,QAAjB,EAA2BE,MAA3B,CAAkC,qBAAlC,CAAhB;AACH;;AAED,mBAAO,MAAKC,OAAL,CAAaT,IAAb,CAAP;AAZgB;AAanB;;AAlB+B,CAApC",
+    "file": "..\\..\\..\\src\\admin\\controller\\keywords.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\r\nconst moment = require('moment');\r\nmodule.exports = class extends Base {\r\n    /**\r\n     * index action\r\n     * @return {Promise} []\r\n     */\r\n    async indexAction() {\r\n        const page = this.get('page') || 1;\r\n        const size = this.get('size') || 10;\r\n        const name = this.get('name') || '';\r\n\r\n        const model = this.model('cart');\r\n        const data = await model.where({goods_name: ['like', `%${name}%`]}).order(['id DESC']).page(page, size).countSelect();\r\n\r\n        for (const item of data.data) {\r\n            item.add_time = moment.unix(item.add_time).format('YYYY-MM-DD HH:mm:ss');\r\n        }\r\n\r\n        return this.success(data);\r\n    }\r\n\r\n};\r\n"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\model\\cart.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "getGoodsList",
+        "goodsList",
+        "model",
+        "where",
+        "user_id",
+        "userId",
+        "is_delete",
+        "select",
+        "getCheckedGoodsList",
+        "checked",
+        "clearBuyGoods",
+        "$res",
+        "update"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACvC;;;;AAIMC,gBAAN,GAAqB;AAAA;;AAAA;AACjB,kBAAMC,YAAY,MAAM,MAAKC,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB;AAC7CC,yBAASN,MAAMO,MAD8B;AAE7CC,2BAAW;AAFkC,aAAzB,EAGrBC,MAHqB,EAAxB;AAIA,mBAAON,SAAP;AALiB;AAMpB;AACD;;;;AAIMO,uBAAN,GAA4B;AAAA;;AAAA;AACxB,kBAAMP,YAAY,MAAM,OAAKC,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB;AAC7CC,yBAASN,MAAMO,MAD8B;AAE7CI,yBAAS,CAFoC;AAG7CH,2BAAW;AAHkC,aAAzB,EAIrBC,MAJqB,EAAxB;AAKA,mBAAON,SAAP;AANwB;AAO3B;AACD;;;;AAIMS,iBAAN,GAAsB;AAAA;;AAAA;AAClB,kBAAMC,OAAO,MAAM,OAAKT,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB;AACxCC,yBAASN,MAAMO,MADyB;AAExCI,yBAAS,CAF+B;AAGxCH,2BAAW;AAH6B,aAAzB,EAIhBM,MAJgB,CAIT;AACNN,2BAAW;AADL,aAJS,CAAnB;AAOA,mBAAOK,IAAP;AARkB;AASrB;AArCsC,CAA3C",
+    "file": "..\\..\\..\\src\\api\\model\\cart.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Model {\r\n    /**\r\n     * 获取购物车的商品\r\n     * @returns {Promise.<*>}\r\n     */\r\n    async getGoodsList() {\r\n        const goodsList = await this.model('cart').where({\r\n            user_id: think.userId,\r\n            is_delete: 0\r\n        }).select();\r\n        return goodsList;\r\n    }\r\n    /**\r\n     * 获取购物车的选中的商品\r\n     * @returns {Promise.<*>}\r\n     */\r\n    async getCheckedGoodsList() {\r\n        const goodsList = await this.model('cart').where({\r\n            user_id: think.userId,\r\n            checked: 1,\r\n            is_delete: 0\r\n        }).select();\r\n        return goodsList;\r\n    }\r\n    /**\r\n     * 清空已购买的商品\r\n     * @returns {Promise.<*>}\r\n     */\r\n    async clearBuyGoods() {\r\n        const $res = await this.model('cart').where({\r\n            user_id: think.userId,\r\n            checked: 1,\r\n            is_delete: 0\r\n        }).update({\r\n            is_delete: 1\r\n        });\r\n        return $res;\r\n    }\r\n};"
+    ]
+}

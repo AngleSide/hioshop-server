@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\model\\footprint.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "addFootprint",
+        "userId",
+        "goodsId",
+        "currentTime",
+        "parseInt",
+        "Date",
+        "getTime",
+        "info",
+        "where",
+        "goods_id",
+        "user_id",
+        "find",
+        "isEmpty",
+        "add",
+        "add_time",
+        "update"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACjCC,gBAAN,CAAmBC,MAAnB,EAA2BC,OAA3B,EAAoC;AAAA;;AAAA;AAChC;;AAEA,kBAAMC,cAAcC,SAAS,IAAIC,IAAJ,GAAWC,OAAX,KAAuB,IAAhC,CAApB;;AAEA,gBAAIL,SAAS,CAAT,IAAcC,UAAU,CAA5B,EAA+B;AAC3B,oBAAIK,OAAO,MAAM,MAAKC,KAAL,CAAW;AACxBC,8BAAUP,OADc;AAExBQ,6BAAST;AAFe,iBAAX,EAGdU,IAHc,EAAjB;AAIA,oBAAIb,MAAMc,OAAN,CAAcL,IAAd,CAAJ,EAAyB;AACrB,0BAAM,MAAKM,GAAL,CAAS;AACXJ,kCAAUP,OADC;AAEXQ,iCAAST,MAFE;AAGXa,kCAAUX;AAHC,qBAAT,CAAN;AAKH,iBAND,MAOK;AACD,0BAAMW,WAAWX,WAAjB;AACA,0BAAM,MAAKK,KAAL,CAAW;AACbC,kCAAUP,OADG;AAEbQ,iCAAST;AAFI,qBAAX,EAGHc,MAHG,CAGI,EAACD,UAAUA,QAAX,EAHJ,CAAN;AAIH;AACJ;AAxB+B;AA0BnC;AA3BsC,CAA3C",
+    "file": "..\\..\\..\\src\\api\\model\\footprint.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Model {\r\n    async addFootprint(userId, goodsId) {\r\n        // 用户已经登录才可以添加到足迹\r\n\r\n        const currentTime = parseInt(new Date().getTime() / 1000);\r\n\r\n        if (userId > 0 && goodsId > 0) {\r\n            let info = await this.where({\r\n                goods_id: goodsId,\r\n                user_id: userId\r\n            }).find();\r\n            if (think.isEmpty(info)) {\r\n                await this.add({\r\n                    goods_id: goodsId,\r\n                    user_id: userId,\r\n                    add_time: currentTime\r\n                });\r\n            }\r\n            else {\r\n                const add_time = currentTime;\r\n                await this.where({\r\n                    goods_id: goodsId,\r\n                    user_id: userId\r\n                }).update({add_time: add_time});\r\n            }\r\n        }\r\n\r\n    }\r\n};\r\n"
+    ]
+}

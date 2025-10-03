@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\user.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "fs",
+        "_",
+        "moment",
+        "module",
+        "exports"
+    ],
+    "mappings": "AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA,MAAMC,KAAKD,QAAQ,IAAR,CAAX;AACA,MAAME,IAAIF,QAAQ,QAAR,CAAV;AACA,MAAMG,SAASH,QAAQ,QAAR,CAAf;AACAI,OAAOC,OAAP,GAAiB,cAAcN,IAAd,CAAmB,EAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\user.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\r\nconst fs = require('fs');\r\nconst _ = require('lodash');\r\nconst moment = require('moment');\r\nmodule.exports = class extends Base {\r\n    \r\n};"
+    ]
+}

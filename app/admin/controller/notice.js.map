@@ -1,0 +1,45 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\notice.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "moment",
+        "module",
+        "exports",
+        "indexAction",
+        "model",
+        "data",
+        "select",
+        "item",
+        "end_time",
+        "unix",
+        "format",
+        "success",
+        "updateContentAction",
+        "id",
+        "post",
+        "content",
+        "where",
+        "update",
+        "addAction",
+        "parseInt",
+        "Date",
+        "getTime",
+        "info",
+        "add",
+        "updateAction",
+        "currentTime",
+        "is_delete",
+        "destoryAction",
+        "limit",
+        "delete"
+    ],
+    "mappings": "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",
+    "file": "..\\..\\..\\src\\admin\\controller\\notice.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\r\nconst moment = require('moment');\r\n\r\nmodule.exports = class extends Base {\r\n    /**\r\n     * index action\r\n     * @return {Promise} []\r\n     */\r\n    async indexAction() {\r\n        const model = this.model('notice');\r\n        const data = await model.select();\r\n\r\n        for (const item of data) {\r\n            item.end_time = moment.unix(item.end_time).format('YYYY-MM-DD HH:mm:ss');\r\n        }\r\n\r\n        return this.success(data);\r\n    }\r\n\r\n    async updateContentAction() {\r\n        const id = this.post('id');\r\n        const content = this.post('content');\r\n        const model = this.model('notice');\r\n        const data = await model.where({id: id}).update({content: content});\r\n        return this.success(data);\r\n    }\r\n\r\n\r\n    async addAction() {\r\n        const content = this.post('content');\r\n        let end_time = this.post('time');\r\n\r\n        end_time = parseInt(new Date(end_time).getTime() / 1000);\r\n\r\n        let info = {\r\n            content:content,\r\n            end_time:end_time\r\n        }\r\n        const model = this.model('notice');\r\n        const data = await model.add(info);\r\n        return this.success(data);\r\n    }\r\n\r\n\r\n    async updateAction() {\r\n        const content = this.post('content');\r\n        let end_time = this.post('time');\r\n        let id = this.post('id');\r\n\r\n        end_time = parseInt(new Date(end_time).getTime() / 1000);\r\n        const currentTime = parseInt(new Date().getTime() / 1000);\r\n\r\n\r\n        let info = {\r\n            content:content,\r\n            end_time:end_time\r\n        };\r\n\r\n        if(end_time > currentTime){\r\n            info.is_delete = 0;\r\n        }\r\n        else{\r\n            info.is_delete = 1;\r\n        }\r\n        const model = this.model('notice');\r\n        const data = await model.where({id:id}).update(info);\r\n        return this.success(data);\r\n    }\r\n\r\n\r\n    async destoryAction() {\r\n        const id = this.post('id');\r\n        await this.model('notice').where({id: id}).limit(1).delete();\r\n        return this.success();\r\n    }\r\n};\r\n"
+    ]
+}
