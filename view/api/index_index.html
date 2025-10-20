@@ -10,17 +10,18 @@
     <div class="wrap">
       <div class="content-card">
         <h1 class="company-name">倍司网络科技小程序样板</h1>
-        <div class="screenshot">
-          <img
-            src="https://camo.githubusercontent.com/15cbb8e1aaba1540c7cf782c1edb873916bd80efb2f39e531dc9d661749f6cd8/68747470733a2f2f696d616765732e67697465652e636f6d2f75706c6f6164732f696d616765732f323032302f313131382f3039303335395f32316330333034655f313739343939362e6a706567"
-            alt="小程序模板示意图"
-          />
-        </div>
         <div class="cta">
-          <p class="cta-message">欢迎咨询，获取小程序搭建方案与演示账号。</p>
+          <p class="cta-message">欢迎咨询，获取商城小程序搭建方案</p>
+          <button
+            type="button"
+            class="screenshot-button"
+            data-action="open-screenshot"
+          >
+            查看小程序模板截图
+          </button>
           <div class="contact-list">
             <div class="contact-item">
-              <span class="contact-label">微信</span>
+              <span class="contact-label">咨询热线</span>
               <a href="weixin://dl/chat?15715077455" class="contact-link"
                 >15715077455</a
               >
@@ -43,14 +44,84 @@
             <span>扫码体验小程序</span>
           </div>
         </div>
-        <a
-          class="website-link"
-          href="https://beisi.tech/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >访问公司网站</a
-        >
       </div>
     </div>
+    <div
+      class="screenshot-modal"
+      id="screenshotModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-content">
+        <button
+          type="button"
+          class="modal-close"
+          data-action="close-screenshot"
+          aria-label="关闭截图"
+        >
+          &times;
+        </button>
+        <img
+          src="https://camo.githubusercontent.com/15cbb8e1aaba1540c7cf782c1edb873916bd80efb2f39e531dc9d661749f6cd8/68747470733a2f2f696d616765732e67697465652e636f6d2f75706c6f6164732f696d616765732f323032302f313131382f3039303335395f32316330333034655f313739343939362e6a706567"
+          alt="小程序模板示意图"
+        />
+      </div>
+    </div>
+    <script>
+      (function () {
+        var openButton = document.querySelector(
+          '[data-action="open-screenshot"]'
+        );
+        var modal = document.getElementById("screenshotModal");
+        if (!openButton || !modal) {
+          return;
+        }
+        var closeButton = modal.querySelector(
+          '[data-action="close-screenshot"]'
+        );
+        var lastFocused = null;
+
+        function openModal() {
+          lastFocused = document.activeElement;
+          modal.classList.add("is-visible");
+          modal.setAttribute("aria-hidden", "false");
+          if (closeButton) {
+            closeButton.focus();
+          }
+        }
+
+        function closeModal() {
+          modal.classList.remove("is-visible");
+          modal.setAttribute("aria-hidden", "true");
+          if (lastFocused && typeof lastFocused.focus === "function") {
+            lastFocused.focus();
+          }
+        }
+
+        openButton.addEventListener("click", openModal);
+        if (closeButton) {
+          closeButton.addEventListener("click", closeModal);
+        }
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            closeModal();
+          }
+        });
+        document.addEventListener("keydown", function (event) {
+          if (
+            event.key === "Escape" &&
+            modal.classList.contains("is-visible")
+          ) {
+            closeModal();
+          }
+        });
+      })();
+    </script>
+    <noscript>
+      <div class="noscript-message">
+        请启用浏览器 JavaScript 以查看小程序模板截图。
+      </div>
+    </noscript>
   </body>
 </html>
