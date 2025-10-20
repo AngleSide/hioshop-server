@@ -4,19 +4,14 @@
 - 测试数据来自上述开源项目
 - 服务端 api 基于 Node.js + ThinkJS + MySQL
 
-### 基于海风小店开发上线的小程序
-
-<img width="200" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/mwyx.jpg">
-
 ### 视频教程
 
 https://www.bilibili.com/video/av89567916
 
 ### 本项目需要配合
 
-微信小程序项目：GitHub: https://github.com/iamdarcy/hioshop-miniprogram  
-electron 版管理后台：https://github.com/iamdarcy/hioshop-admin  
-web 版管理后台：https://github.com/iamdarcy/hioshop-admin-web
+微信小程序项目：GitHub: https://github.com/xiaolinbenben/hioshop-miniprogram  
+web 版管理后台：https://github.com/xiaolinbenben/hioshop-admin
 
 用户名：qilelab.com  
 密码：qilelab.com
@@ -26,7 +21,7 @@ web 版管理后台：https://github.com/iamdarcy/hioshop-admin-web
 - 克隆项目到本地
 
 ```
-git clone https://github.com/iamdarcy/hioshop-server
+git clone https://github.com/xiaolinbenben/hioshop-server
 ```
 
 - 创建数据库 hiolabsDB 并导入项目根目录下的 hiolabsDB.sql
@@ -86,6 +81,12 @@ npm start
 
 启动后，本地访问 http://127.0.0.1:8360/
 
+- 重新编译命令
+
+```
+docker run --rm -v "${PWD}:/srv" -w /srv node:18-alpine sh -c "npm ci && npm run compile"
+```
+
 ### 上线需要以下准备工作：
 
 - 一个微信服务公众号
@@ -108,32 +109,3 @@ npm start
 - 搜索页：排序
 - 分类页：分页加载商品
 - 我的页面：订单（待付款，待发货，待收货），足迹，收货地址
-
-### 项目截图
-
-请参考微信小程序项目：https://github.com/iamdarcy/hioshop-miniprogram
-
-### 最近更新
-
-- 新增生成分享图的功能  
-  在 src/common/config/config.js 需要设置好已经开通 https 的七牛 bucket 的参数
-  <img width="600" src="https://images.gitee.com/uploads/images/2020/1118/090429_8fc928b0_1794996.jpeg"/>
-
-- 项目地址  
-  服务端： https://github.com/iamdarcy/hioshop-server  
-  后台管理：https://github.com/iamdarcy/hioshop-admin  
-  微信小程序：https://github.com/iamdarcy/hioshop-miniprogram
-
-- 本项目会持续更新和维护，喜欢别忘了 Star，有问题可通过微信、QQ 群联系我，谢谢您的关注。
-- 我的微信号是 lookgxl，加群时回答这个问题即可入群。  
-  海风小店小程序商城 1 群 824781955（已满）  
-  海风小店小程序商城 2 群 932101372（已满）  
-  海风小店小程序商城 3 群 1130172339（已满）  
-  海风小店小程序商城 4 群 652317079  
-  <img width="500" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/contact.jpg"/>
-
-### 重新编译命令
-
-```
-docker run --rm -v "${PWD}:/srv" -w /srv node:18-alpine sh -c "npm ci && npm run compile"
-```
