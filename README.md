@@ -2,7 +2,7 @@
 
 - 基于开源项目 NideShop 重建，精简了一些功能的同时完善了一些功能，并重新设计了 UI
 - 测试数据来自上述开源项目
-- 服务端 api 基于Ｎ ode.js+ThinkJS+MySQL
+- 服务端 api 基于 Node.js + ThinkJS + MySQL
 
 ### 基于海风小店开发上线的小程序
 
