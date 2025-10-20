@@ -2,7 +2,6 @@ services:
   server:
     build: .
     container_name: hioshop-server
-    platform: linux/amd64
     environment:
       NODE_ENV: production
       PORT: 8360
