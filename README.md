@@ -18,12 +18,8 @@ https://www.bilibili.com/video/av89567916
 electron 版管理后台：https://github.com/iamdarcy/hioshop-admin  
 web 版管理后台：https://github.com/iamdarcy/hioshop-admin-web
 
-线上 demo：[https://demo.qilelab.com/hioshop](https://demo.qilelab.com/hioshop/)  
 用户名：qilelab.com  
 密码：qilelab.com
-
-<a target="_blank" href="https://www.aliyun.com/?source=5176.11533457&userCode=zm04niet"><img width="1400" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/aliyun.jpg"></a>
-阿里云主机：低至 2 折 <a target="_blank" href="https://www.aliyun.com/?source=5176.11533457&userCode=zm04niet">立即去看看</a>
 
 ### 本地开发环境配置
 
