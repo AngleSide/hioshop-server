@@ -1,58 +1,181 @@
+*, *::before, *::after {
+ box-sizing: border-box;
+}
+
 body {
  margin: 0;
  padding: 0;
  width: 100%;
- height: 100%;
-}
-.wrap {
- width: 100vw;
- height: 100vh;
- background: url("/static/images/background.jpg");
-}
-
-.top {
- height: 140px;
- padding: 20px 40px;
+ min-height: 100vh;
+ font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
  color: #fff;
 }
 
-.top .logo {
- font-size: 20px;
- margin-bottom: 20px;
-}
-
-.top .tip {
- font-size: 13px;
-}
-
-.bottom {
- position: fixed;
+.wrap {
  width: 100%;
- bottom: 20px;
- margin-bottom: 20px;
+ min-height: 100vh;
+ background: url("/static/images/background.jpg") center/cover no-repeat fixed;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 40px 20px;
+}
+
+.content-card {
+ width: 100%;
+ max-width: 960px;
+ background: rgba(0, 0, 0, 0.6);
+ border-radius: 16px;
+ padding: 40px 32px;
+ backdrop-filter: blur(4px);
+ box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+ display: flex;
+ flex-direction: column;
+ gap: 24px;
+}
+
+.company-name {
+ margin: 0;
+ font-size: 32px;
+ letter-spacing: 1px;
+}
+
+.screenshot {
+ margin: 0;
+}
+
+.screenshot img {
+ display: block;
+ width: 100%;
+ height: auto;
+ border-radius: 14px;
+ box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+ background: rgba(255, 255, 255, 0.08);
+}
+
+.cta {
+ display: flex;
+ flex-direction: column;
+ gap: 18px;
+ align-items: center;
+}
+
+.cta-message {
+ margin: 0;
+ font-size: 18px;
+ line-height: 1.8;
+ text-align: center;
+}
+
+.contact-list {
+ display: flex;
+ justify-content: center;
+ gap: 16px 28px;
+ font-size: 16px;
+}
+
+.contact-item {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ padding: 12px 18px;
+ background: rgba(255, 255, 255, 0.08);
+ border-radius: 12px;
+}
+
+.contact-label {
+ font-weight: 600;
+ letter-spacing: 1px;
+ color: #c6e9ff;
+}
+
+.contact-link {
+ color: #7ad6ff;
+ text-decoration: none;
+}
+
+.contact-link:hover {
+ color: #c0ecff;
+ text-decoration: underline;
+}
+
+.website-link {
+ align-self: center;
+ display: inline-block;
+ padding: 10px 24px;
+ border-radius: 8px;
+ background: linear-gradient(135deg, #38a1ff, #306bff);
  color: #fff;
  font-size: 16px;
- color: #fff;
- display: flex;
- justify-content: center;
-}
-.middle {
- display: flex;
- justify-content: center;
- align-items: center;
- font-size: 32px;
- color: #fff;
-}
-a:link {
- color: #fff;
+ font-weight: 600;
  text-decoration: none;
-}
-a:visited {
- text-decoration: none;
- color: #fff;
+ transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-a:hover {
- text-decoration: underline;
- color: #ccc;
+.website-link:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 10px 20px rgba(48, 107, 255, 0.4);
+}
+
+.qr-section {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ gap: 24px;
+}
+
+.qr-card {
+ background: rgba(255, 255, 255, 0.1);
+ border-radius: 14px;
+ padding: 20px;
+ width: 220px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 16px;
+ text-align: center;
+ box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.qr-card img {
+ width: 160px;
+ height: 160px;
+ object-fit: cover;
+ border-radius: 12px;
+ background: #fff;
+ padding: 8px;
+}
+
+.qr-card span {
+ font-size: 15px;
+ line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+ .content-card {
+  padding: 28px 20px;
+ }
+
+ .company-name {
+  font-size: 26px;
+ }
+
+ .cta-message {
+  font-size: 16px;
+ }
+
+ .contact-item {
+  width: 100%;
+  justify-content: space-between;
+ }
+
+ .qr-card {
+  width: 100%;
+  max-width: 260px;
+ }
+
+ .qr-card img {
+  width: 180px;
+  height: 180px;
+ }
 }
